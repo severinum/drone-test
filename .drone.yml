@@ -1,18 +1,18 @@
----
-kind: pipeline
-type: docker
-name: TESTING
-
-platform:
-  os: linux
-  arch: amd64
-
-
-steps:
-  - name: test
-    image: maven:3.8.3-openjdk-17
-    commands:
-      - mvn test
+#---
+#kind: pipeline
+#type: docker
+#name: TESTING
+#
+#platform:
+#  os: linux
+#  arch: amd64
+#
+#
+#steps:
+#  - name: test
+#    image: maven:3.8.3-openjdk-17
+#    commands:
+#      - mvn test
 
 ---
 kind: pipeline
@@ -22,11 +22,6 @@ name: build-push-dockerhub
 platform:
   os: linux
   arch: amd64
-
-volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
 
 steps:
   - name: lint_dockerfiles
@@ -47,9 +42,6 @@ steps:
     image: plugins/docker
     depends_on:
       - package_quarkus_app
-    volumes:
-      - name: dockersock
-        path: "/var/run/docker.sock" # Mandatory
     settings:
       username: sever3d
       password:
