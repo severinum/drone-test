@@ -29,10 +29,10 @@ steps:
     settings:
       username: sever3d
       password:
-        from_secret: docker_hub_pwd # Configure the secret in the Drone repository setting
+        from_secret: DOCKER_HUB_TOKEN
       repo: sever3d/quarkus-drone-demo
       tags: 0.0.1
-      dockerfile: src/main/docker/Dockerfile.legacy-jar # Where the Dockerfile is located in your git repository
+      dockerfile: src/main/docker/Dockerfile.legacy-jar
 
 
 trigger:
