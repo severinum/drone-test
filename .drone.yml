@@ -23,6 +23,11 @@ platform:
   os: linux
   arch: amd64
 
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
 steps:
   - name: lint_dockerfiles
     pull: if-not-exists
@@ -32,6 +37,26 @@ steps:
       - hadolint src/main/docker/Dockerfile.legacy-jar
       - hadolint src/main/docker/Dockerfile.native
       - hadolint src/main/docker/Dockerfile.native-micro
+
+  - name: package_quarkus_app
+    image: maven:3.8.3-openjdk-17
+    commands:
+      - mvn package -Dquarkus.package.type=legacy-jar
+
+  - name: build-and-push-image
+    image: plugins/docker
+    depends_on:
+      - package_quarkus_app
+    volumes:
+      - name: dockersock
+        path: "/var/run/docker.sock" # Mandatory
+    settings:
+      username: sever3d
+      password:
+        from_secret: docker_hub_pwd # Configure the secret in the Drone repository setting
+      repo: sever3d/quarkus-drone-demo
+      tags: 0.0.1
+      dockerfile: src/main/docker/Dockerfile.legacy-jar # Where the Dockerfile is located in your git repository
 
 
 trigger:
