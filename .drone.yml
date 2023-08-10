@@ -1,10 +1,62 @@
+---
 kind: pipeline
 type: docker
-name: default
+name: build-push-dockerhub
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
-  - name: greeting
-    image: alpine
+  - name: lint_dockerfiles
+    pull: if-not-exists
+    image: hadolint/hadolint:latest-alpine
     commands:
-      - echo hello
-      - echo world
+      - hadolint src/main/docker/Dockerfile.jvm
+      - hadolint src/main/docker/Dockerfile.legacy-jar
+      - hadolint src/main/docker/Dockerfile.native
+      - hadolint src/main/docker/Dockerfile.native-micro
+
+  - name: package_quarkus_app
+    image: maven:3.8.3-openjdk-17
+    commands:
+      - mvn package -Dquarkus.package.type=legacy-jar
+
+  - name: build-and-push-image
+    image: plugins/docker
+    depends_on:
+      - package_quarkus_app
+    settings:
+      username: sever3d
+      password:
+        from_secret: DOCKER_HUB_TOKEN
+      repo: sever3d/quarkus-drone-demo
+      tags:
+        - 0.0.1
+        - latest
+      dockerfile: src/main/docker/Dockerfile.legacy-jar
+    platform:
+      - linux/amd64
+      - linux/arm64
+
+trigger:
+  branch:
+    - main
+  event:
+    - pull_request
+
+#---
+#kind: pipeline
+#type: docker
+#name: TESTING
+#
+#platform:
+#  os: linux
+#  arch: amd64
+#
+#
+#steps:
+#  - name: test
+#    image: maven:3.8.3-openjdk-17
+#    commands:
+#      - mvn test
