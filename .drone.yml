@@ -31,24 +31,13 @@ steps:
       password:
         from_secret: DOCKER_HUB_TOKEN
       repo: sever3d/quarkus-drone-demo
-      tags: 0.0.1
+      tags:
+        - 0.0.1
+        - latest
       dockerfile: src/main/docker/Dockerfile.legacy-jar
-
-  - name: multiarch_build
-    image: thegeeklab/drone-docker-buildx:23
-    privileged: true
-    depends_on:
-      - package_quarkus_app
-    settings:
-      username: sever3d
-      password:
-        from_secret: DOCKER_HUB_TOKEN
-      repo: sever3d/quarkus-drone-demo
-      tags: multiarch
-      platforms:
+      platform:
         - linux/amd64
         - linux/arm64
-
 
 trigger:
   branch:
