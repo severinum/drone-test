@@ -36,7 +36,8 @@ steps:
 
   - name: multiarch_build
     image: thegeeklab/drone-docker-buildx:23
-    privileged: true
+    depends_on:
+      - package_quarkus_app
     settings:
       username: sever3d
       password:
