@@ -33,3 +33,11 @@ steps:
       - hadolint src/main/docker/Dockerfile.native
       - hadolint src/main/docker/Dockerfile.native-micro
 
+
+trigger:
+  branch:
+    - main
+  event:
+    - pull_request
+
+
