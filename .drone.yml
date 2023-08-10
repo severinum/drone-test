@@ -1,6 +1,7 @@
+---
 kind: pipeline
 type: docker
-name: default
+name: TESTING
 
 platform:
   os: linux
@@ -12,3 +13,23 @@ steps:
     image: maven:3.8.3-openjdk-17
     commands:
       - mvn test
+
+---
+kind: pipeline
+type: docker
+name: build-push-dockerhub
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: lint_dockerfiles
+    pull: if-not-exists
+    image: hadolint/hadolint:latest-alpine
+    commands:
+      - hadolint src/main/docker/Dockerfile.jvm
+      - hadolint src/main/docker/Dockerfile.legacy-jar
+      - hadolint src/main/docker/Dockerfile.native
+      - hadolint src/main/docker/Dockerfile.native-micro
+
