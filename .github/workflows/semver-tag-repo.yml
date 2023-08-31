@@ -24,7 +24,7 @@ jobs:
         uses: UKHomeOffice/sas-github-workflows/.github/actions/calculate-semver-value@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_to_highest: ${{ github.base_ref == 'main' }}
+          #default_to_highest: ${{ github.base_ref == 'main' }}
 
       - name: Tag Repository
         uses: UKHomeOffice/semver-tag-action@v3
