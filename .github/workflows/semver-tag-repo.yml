@@ -1,4 +1,4 @@
-name: 'SemVer'
+name: 'SemVer Tag Repo'
 on:
   pull_request:
     types: [ closed ]
@@ -22,10 +22,6 @@ jobs:
           increment: ${{ steps.label.outputs.matchedLabels }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_to_highest: ${{ github.base_ref == 'main' }}
-
-      - uses: some-provider/any-action@main
-        with:
-          tag: ${{ steps.calculate.outputs.version }}
 
       - name: Tag Repository
         uses: UKHomeOffice/semver-tag-action@main
