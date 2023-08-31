@@ -15,8 +15,9 @@ jobs:
           shell: bash
 
   tag:
-    name: SemVer
+    name: SemVer auto-tagging
     runs-on: ubuntu-latest
+    needs: build 
     if: github.event.pull_request.merged == true
     permissions:
       packages: write
