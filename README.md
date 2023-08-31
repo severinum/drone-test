@@ -6,6 +6,8 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Add GH releases and tagging
 
+Auto-tagging implemented in tag 1.0.0
+
 
 ## Running the application in dev mode
 
