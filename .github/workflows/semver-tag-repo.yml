@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - "**task-**"
 jobs:
   tag:
     name: 'Main SemVer Tag'
