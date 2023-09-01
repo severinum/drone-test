@@ -1,0 +1,25 @@
+name: build-push-image-moja-akcja
+
+on:
+    push:
+      branches:
+        - main
+        - 'task-**'
+
+jobs:
+    buildpush:
+        name: 'Main Semver Tag'
+        runs-on: ubuntu-latest
+        steps:
+          - name: Publish image to Docker
+            uses: severinum/github-workflows/.github/actions/docker-publish
+            with:
+                registry: quay.io/sewerynmi
+                username: ${{ secrets.DOCKER_USER_NAME || secrets.QUAY_ROBOT_USER_NAME }}
+                password: ${{ secrets.DOCKER_PASSWORD || secrets.QUAY_ROBOT_TOKEN }}
+                tag: happy
+                tag_latest: ${{ github.base_ref == 'main' }}
+                image: drone-demo
+
+
+    
