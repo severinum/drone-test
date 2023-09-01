@@ -1,0 +1,18 @@
+project:
+  name: segas
+
+image:
+  repository: sever3d/nodeapp # temp image
+  tag: latest
+
+deployment:
+  replicas: 1
+
+ports:
+  servicePort: 80
+  targetPort: 8080 # Nginx proxy target port
+
+
+ingress:
+  #InternalHosts: 185-3-92-151.ip.linodeusercontent.com # KUBE VPN
+  ExternalHosts: 185-3-92-151.ip.linodeusercontent.com  # POISE
