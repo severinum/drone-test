@@ -30,12 +30,12 @@ jobs:
           - name: Publish image to Docker
             uses: severinum/github-workflows/.github/actions/docker-publish@v1
             with:
-                registry: quay.io/sewerynmi
+                registry: quay.io
                 username: ${{ secrets.DOCKER_USER_NAME || secrets.QUAY_ROBOT_USER_NAME }}
                 password: ${{ secrets.DOCKER_PASSWORD || secrets.QUAY_ROBOT_TOKEN }}
                 tag: happy
                 tag_latest: ${{ github.base_ref == 'main' }}
-                image: drone-demo
+                image: sewerynmi/drone-demo
 
 
     
