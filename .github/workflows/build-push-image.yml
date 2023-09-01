@@ -22,6 +22,15 @@ jobs:
           - name: Build with Maven
             run: mvn --batch-mode --update-snapshots package
 
+          - run: ls -la
+            shell: bash
+        
+          - run: |
+              cd src/main/docker/Dockerfile.legacy-jar
+              ls -la
+            shell: bash
+                
+
           - name: Publish image to Docker
             uses: severinum/github-workflows/.github/actions/docker-publish@v1
             with:
