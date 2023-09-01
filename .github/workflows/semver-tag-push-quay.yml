@@ -10,4 +10,6 @@ jobs:
     #if: github.event.pull_request.merged == true
     with:
        image: 'quay.io/sewerynmi/drone-demo'
+       username: ${{ secrets.QUAY_ROBOT_USER_NAME }}
+       password: ${{ secrets.QUAY_ROBOT_TOKEN }}
     secrets: inherit
