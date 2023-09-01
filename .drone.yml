@@ -27,6 +27,15 @@ trigger:
     - tag
 
 steps:
+  - name: Lint-Helm-Chart
+    image: pelotech/drone-helm3
+    settings:
+      mode: lint
+      chart: helm
+      values_files: values.yaml
+      values:
+      - image.tag=latest
+
   - name: deployment
     image: pelotech/drone-helm3
     settings:
@@ -40,7 +49,7 @@ steps:
         from_secret: kube_api_server
       kube_token:
         from_secret: kube_token
-      values_files: /values.yaml
+      values_files: values.yaml
       wait_for_upgrade: true
       timeout: 10m
       debug: true
