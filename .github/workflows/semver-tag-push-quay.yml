@@ -1,0 +1,14 @@
+name: build-publish-quay-and-tag
+
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  build:
+    uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker.yml@v2
+    if: github.event.pull_request.merged == true
+    with:
+       image: 'quay.io/sewerynmi/drone-demo'
+       tag: ${{ github.sha }}
+    secrets: inherit
