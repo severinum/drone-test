@@ -24,7 +24,7 @@ trigger:
 
 steps:
   - name: deploy
-    image: pelotech/drone-helm3
+    image: alpine
     commands: 
       - echo Tag or Promote event trigger
       - echo "Version to deploy ${VERSION}"
