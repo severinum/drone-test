@@ -19,9 +19,5 @@ jobs:
   build_push_tag_repo:
     uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker.yml@v2
     with:
-       registry: quay.io
        image: quay.io/sewerynmi/drone-demo
-       ecr: false
-    secrets: 
-      username: ${{ secrets.DOCKER_USER_NAME || secrets.QUAY_ROBOT_USER_NAME }}
-      password: ${{ secrets.DOCKER_PASSWORD || secrets.QUAY_ROBOT_TOKEN }}
+    secrets: inherit
