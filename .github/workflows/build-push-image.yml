@@ -31,7 +31,7 @@ jobs:
                 tag: happy
                 tag_latest: ${{ github.base_ref == 'main' }}
                 image: drone-demo
-                docker_context: src/main/docker/Dockerfile.legacy-jar
+                dockerfile: ./src/main/docker/Dockerfile.legacy-jar
 
 
     
