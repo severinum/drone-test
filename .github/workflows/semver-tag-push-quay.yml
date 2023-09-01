@@ -19,7 +19,7 @@ jobs:
   build_push_tag_repo:
     uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker.yml@v2
     with:
-       registry: 'quay.io'
-       image: 'quay.io/sewerynmi/drone-demo'
+       registry: quay.io
+       image: quay.io/sewerynmi/drone-demo
        ecr: false
     # secrets: inherit
