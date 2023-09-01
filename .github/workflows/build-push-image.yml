@@ -35,7 +35,7 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD || secrets.QUAY_ROBOT_TOKEN }}
                 tag: happy
                 tag_latest: ${{ github.base_ref == 'main' }}
-                image: sewerynmi/drone-demo
+                image: quay.io/sewerynmi/drone-demo
 
 
     
