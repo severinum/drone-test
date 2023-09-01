@@ -22,4 +22,4 @@ jobs:
        registry: quay.io
        image: quay.io/sewerynmi/drone-demo
        ecr: false
-    # secrets: inherit
+    secrets: inherit
