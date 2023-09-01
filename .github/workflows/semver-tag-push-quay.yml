@@ -10,5 +10,4 @@ jobs:
     if: github.event.pull_request.merged == true
     with:
        image: 'quay.io/sewerynmi/drone-demo'
-       tag: ${{ github.sha }}
     secrets: inherit
