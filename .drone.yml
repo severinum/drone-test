@@ -29,6 +29,23 @@ trigger:
 steps:
   - name: deployment
     image: pelotech/drone-helm3
+    settings:
+      chart: helm
+      mode: upgrade
+      namespace: default
+      release: cto-dashboard
+      kube_certificate:
+        from_secret: kube_certificate
+      kube_api_server: 
+        from_secret: kube_api_server
+      kube_token:
+        from_secret: kube_token
+      values_files: /values.yaml
+      wait_for_upgrade: true
+      timeout: 10m
+      debug: true
+      values:
+      - image.tag=latest
     commands: 
       - echo "Tag or Promote event trigger"
       - echo "Version to deploy ${VERSION}"

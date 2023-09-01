@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.project.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.project.name }}
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.project.name }}
+    spec:
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key: nginx.conf
+              path: nginx.conf
+      securityContext: # this one is needed for LINODE, otherwise not able to run pod 
+        sysctls:
+        - name: net.ipv4.ip_unprivileged_port_start
+          value: "80"
+      containers:
+      - name: {{ .Values.project.name }}
+        image:  "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "10Mi" 
+            cpu: "100m"
+          limits:
+            memory: "200Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 9000
+      
+      - name: {{ .Values.project.name }}-proxy
+        image: nginx
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "32Mi" 
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.ports.targetPort }}
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx
+          readOnly: true
+      

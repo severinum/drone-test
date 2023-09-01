@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.project.name }}-external
+  labels:
+    # cert-manager.io/solver: route53
+    cert-manager.io/solver: http01 # change to route53 later ?
+  annotations:
+    #cert-manager.io/enabled: "true"
+    #ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/whitelist-source-range: {{ .Values.ingress.Whitelistsource }}
+    kubernetes.io/ingress.class: nginx # change to nginx-external 
+spec:
+#   tls:
+#     - hosts:
+#         - {{ .Values.project.name }}{{ .Values.ingress.ExternalHosts }}
+#       secretName: {{ .Values.project.name }}-external-cmio
+  rules:
+    - host: {{ .Values.ingress.ExternalHosts }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix #ImplementationSpecific
+          backend:
+            service:
+              name: {{ .Values.project.name }}
+              port:
+                number: {{ .Values.ports.servicePort }}
