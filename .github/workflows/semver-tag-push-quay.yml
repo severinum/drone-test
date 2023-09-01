@@ -15,4 +15,5 @@ jobs:
     #if: github.event.pull_request.merged == true
     with:
        image: 'quay.io/sewerynmi/drone-demo'
+       tag: latest
     secrets: inherit
