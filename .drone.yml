@@ -26,5 +26,5 @@ steps:
   - name: deploy
     image: pelotech/drone-helm3
     commands: 
-      - echo Tag or Promote event
+      - echo Tag or Promote event trigger
       - echo "Version to deploy ${VERSION}"
