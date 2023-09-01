@@ -2,6 +2,10 @@ kind: pipeline
 type: docker
 name: default
 
+trigger:
+  event:
+    - push
+
 steps:
   - name: greeting
     image: alpine
@@ -23,8 +27,8 @@ trigger:
     - tag
 
 steps:
-  - name: deploy
+  - name: deployment
     image: alpine
     commands: 
-      - echo Tag or Promote event trigger
+      - echo "Tag or Promote event trigger"
       - echo "Version to deploy ${VERSION}"
