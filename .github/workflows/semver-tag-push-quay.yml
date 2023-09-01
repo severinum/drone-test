@@ -22,4 +22,6 @@ jobs:
        registry: quay.io
        image: quay.io/sewerynmi/drone-demo
        ecr: false
-    secrets: inherit
+    secrets: 
+      username: ${{ secrets.DOCKER_USER_NAME || secrets.QUAY_ROBOT_USER_NAME }}
+      password: ${{ secrets.DOCKER_PASSWORD || secrets.QUAY_ROBOT_TOKEN }}
