@@ -5,11 +5,21 @@ on:
     types: [ closed ]
   
 jobs:
+  quay-login:
+    name: Quay Login
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to repository
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ inputs.registry || 'quay.io' }}
+          username: ${{ secrets.QUAY_ROBOT_USER_NAME }}
+          password: ${{ secrets.QUAY_ROBOT_TOKEN }}
+
+
   build:
     uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker.yml@v2
     #if: github.event.pull_request.merged == true
     with:
        image: 'quay.io/sewerynmi/drone-demo'
-       username: ${{ secrets.QUAY_ROBOT_USER_NAME }}
-       password: ${{ secrets.QUAY_ROBOT_TOKEN }}
     secrets: inherit
