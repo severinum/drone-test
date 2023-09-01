@@ -3,11 +3,16 @@ name: build-publish-quay-and-tag
 on:
   pull_request:
     types: [ closed ]
+  
+  push:
+    branches:
+      - main
+      - 'task-**'
 
 jobs:
   build:
     uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker.yml@v2
     #if: github.event.pull_request.merged == true
     with:
-       image: 'quay.io/repository/sewerynmi/drone-demo'
+       image: 'quay.io/sewerynmi/drone-demo'
     secrets: inherit
