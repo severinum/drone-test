@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Publish image to Docker
-            uses: severinum/github-workflows/.github/actions/docker-publish
+            uses: severinum/github-workflows/.github/actions/docker-publish@v1
             with:
                 registry: quay.io/sewerynmi
                 username: ${{ secrets.DOCKER_USER_NAME || secrets.QUAY_ROBOT_USER_NAME }}
