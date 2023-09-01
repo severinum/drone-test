@@ -14,7 +14,7 @@ steps:
       - echo World
 ---
 kind: pipeline
-type: kubernetes
+type: docker
 name: deployment
 
 platform:
@@ -28,7 +28,7 @@ trigger:
 
 steps:
   - name: deployment
-    image: alpine
+    image: pelotech/drone-helm3
     commands: 
       - echo "Tag or Promote event trigger"
       - echo "Version to deploy ${VERSION}"
