@@ -26,6 +26,26 @@ steps:
     commands:
       - echo Hello
       - echo World
+
+---
+kind: pipeline
+type: docker
+name: sometest
+steps:
+  - name: build_tag_push_quay
+    <<: *timecard_quay_settings
+    depends_on:
+      - sonar
+    settings:
+      tags:
+        - latest
+        - ${DRONE_COMMIT_SHA}
+    when:
+      event:
+        - push
+      branch:
+        - main
+    
 ---
 kind: pipeline
 type: docker
