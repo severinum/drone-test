@@ -9,7 +9,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     env:
-      DOCKER_REGISTRY: quay.io/semicorp
+      DOCKER_REGISTRY: quay.io/sewerynmi
       DOCKER_REPO: drone-demo
       IMAGE_TAG: default
     steps:
