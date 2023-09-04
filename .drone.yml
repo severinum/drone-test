@@ -1,3 +1,8 @@
+Something: &something
+  commands:
+    - echo Hello
+    - echo World
+
 ---
 kind: pipeline
 type: docker
@@ -10,9 +15,7 @@ trigger:
 steps:
   - name: greeting
     image: alpine
-    commands:
-      - echo Hello
-      - echo World
+    <<: *something
 
 ---
 kind: pipeline
