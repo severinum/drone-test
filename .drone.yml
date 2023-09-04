@@ -31,7 +31,7 @@ steps:
     image: alpine
     commands: 
     - |
-      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latest; then
+      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latests; then
         exit 0
       else
           sleep 20s
