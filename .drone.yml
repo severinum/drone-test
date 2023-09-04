@@ -34,13 +34,16 @@ steps:
     - apk upgrade
     - apk add curl
     - |
-      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latests; then
+      while :
+      do
+      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latest; then
         echo "Tag found. Exiting with code 0"
         exit 0
       else
           echo "Tag not found waiting ..."
-          sleep 20s
+          sleep 10s
       fi
+      done
     
 ---
 kind: pipeline
