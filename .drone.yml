@@ -1,3 +1,11 @@
+definitions: 
+  steps:
+    - step: &build-test
+        name: Build and test
+        script:
+          - mvn package
+        artifacts:
+          - target/**
 ---
 kind: pipeline
 type: docker
@@ -6,19 +14,6 @@ name: default
 trigger:
   event:
     - push
-
-x-database_quay_settings: &database_quay_settings
-  pull: if-not-exists
-  image: plugins/docker
-  settings:
-    registry: quay.io
-    repo: quay.io/ukhomeofficedigital/callisto-timecard-database
-    username:
-      from_secret: quay_robot_name
-    password:
-      from_secret: quay_robot_token
-    dockerfile: db/Dockerfile
-    context: db
 
 steps:
   - name: greeting
@@ -33,7 +28,7 @@ type: docker
 name: sometest
 steps:
   - name: build_tag_push_quay
-    <<: *timecard_quay_settings
+    <<: *build-test
     depends_on:
       - sonar
     settings:
