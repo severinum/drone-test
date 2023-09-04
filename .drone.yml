@@ -21,17 +21,21 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: sometest
+name: search_for_quay_tag
 steps:
   - name: greeting
     image: alpine
     commands:
       - echo "Some Test Here"
-  - name: morehelloagain
+  - name: Search tag
     image: alpine
-    commands:
-      - echo Hello
-      - echo World
+    commands: 
+    - |
+      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latest; then
+        exit 0
+      else
+          sleep 20s
+      fi
     
 ---
 kind: pipeline
