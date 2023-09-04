@@ -1,4 +1,10 @@
 ---
+something: &something
+    image: alpine
+    commands:
+      - echo Hello
+      - echo World
+---
 kind: pipeline
 type: docker
 name: default
@@ -7,18 +13,11 @@ trigger:
   event:
     - push
   
-something: &something
-    image: alpine
-    commands:
-      - echo Hello
-      - echo World
-
 steps:
   - name: greeting
     image: alpine
     commands:
       - echo "Greeting Step and hello !"
-
   - name: morehello
     <<: *something
 
