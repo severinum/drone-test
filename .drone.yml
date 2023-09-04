@@ -1,11 +1,3 @@
-definitions: 
-  steps:
-    - step: &build-test
-        name: Build and test
-        script:
-          - mvn package
-        artifacts:
-          - target/**
 ---
 kind: pipeline
 type: docker
@@ -27,19 +19,10 @@ kind: pipeline
 type: docker
 name: sometest
 steps:
-  - name: build_tag_push_quay
-    <<: *build-test
-    depends_on:
-      - sonar
-    settings:
-      tags:
-        - latest
-        - ${DRONE_COMMIT_SHA}
-    when:
-      event:
-        - push
-      branch:
-        - main
+  - name: greeting
+    image: alpine
+    commands:
+      - echo "Some Test Here"
     
 ---
 kind: pipeline
