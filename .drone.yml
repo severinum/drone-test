@@ -30,7 +30,6 @@ steps:
   - name: Search tag
     image: alpine
     commands: 
-    - echo $${DRONE_COMMIT_SHA}
     - apk update
     - apk upgrade
     - apk add curl
@@ -46,6 +45,11 @@ steps:
           sleep 10s
       fi
       done
+
+  - name: following step
+    image: alpine
+    commands:
+       - echo "Some Test Here"
     
 ---
 kind: pipeline
