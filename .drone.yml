@@ -1,3 +1,12 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    - push
+
 x-database_quay_settings: &database_quay_settings
   pull: if-not-exists
   image: plugins/docker
@@ -10,14 +19,6 @@ x-database_quay_settings: &database_quay_settings
       from_secret: quay_robot_token
     dockerfile: db/Dockerfile
     context: db
----
-kind: pipeline
-type: docker
-name: default
-
-trigger:
-  event:
-    - push
 
 steps:
   - name: greeting
