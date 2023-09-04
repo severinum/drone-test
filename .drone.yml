@@ -30,13 +30,15 @@ steps:
   - name: Search tag
     image: alpine
     commands: 
+    - echo $${DRONE_COMMIT_SHA}
     - apk update
     - apk upgrade
     - apk add curl
     - |
+      echo "Searching for tag $${DRONE_COMMIT_SHA}"
       while :
       do
-      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latests; then
+      if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep $${DRONE_COMMIT_SHA}; then
         echo "Tag found. Exiting with code 0"
         exit 0
       else
