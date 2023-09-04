@@ -31,6 +31,7 @@ steps:
     image: alpine
     commands: 
     - apk update && apk upgrade && apk add curl
+    - curl http://google.com
     - |
       echo "Searching for image tag: $${DRONE_COMMIT_SHA}"
       while :
