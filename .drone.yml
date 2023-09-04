@@ -1,5 +1,6 @@
 ---
-something: &something
+global-variables:
+  something: &something
     image: alpine
     commands:
       - echo Hello
