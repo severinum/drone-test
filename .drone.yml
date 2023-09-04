@@ -30,6 +30,9 @@ steps:
   - name: Search tag
     image: alpine
     commands: 
+    - apk update
+    - apk upgrade
+    - apk add curl
     - curl http://google.com
     - |
       if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latest; then
