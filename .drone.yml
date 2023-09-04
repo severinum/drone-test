@@ -30,6 +30,7 @@ steps:
   - name: Search tag
     image: alpine
     commands: 
+    - curl http://google.com
     - |
       if curl -v --silent https://quay.io/api/v1/repository/ukhomeofficedigital/engineering-guidance-and-standards/tag/ 2>&1 | grep latest; then
         echo "Tag found. Exiting with code 0"
