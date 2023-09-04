@@ -37,7 +37,7 @@ steps:
       do
       if curl -v --silent https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ 2>&1 | grep $${DRONE_COMMIT_SHA}; then
         echo "Tag found. Proceeding to deployment step. [Exiting with code 0]"
-        exit 1
+        exit 0
       else
           echo "Tag not found waiting ..."
           sleep 10s
