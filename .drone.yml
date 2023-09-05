@@ -38,11 +38,12 @@ steps:
     commands: 
     - echo "Looking for SHA $${DRONE_COMMIT_SHA}"
     - |
-      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ 2>&1 | grep -v -L happys;
+      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L 1234 ;
       do
-        echo "Tag not found. Waiting ..."
+        echo "Tag not found. Waiting ..." 
         sleep 5
       done
+      exit 0
 
   - name: following step
     image: alpine/curl:8.2.1
