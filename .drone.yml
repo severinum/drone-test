@@ -42,7 +42,6 @@ steps:
         echo "Tag not found. Waiting ..."
         sleep 5
       done
-      exit 0
 
   - name: following step
     image: alpine/curl:8.2.1
