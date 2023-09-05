@@ -22,11 +22,17 @@ steps:
 kind: pipeline
 type: docker
 name: search_for_quay_tag
+
+trigger:
+  event:
+    - push
+
 steps:
   - name: greeting
-    image: alpine
+    image: alpine/curl:8.2.1
     commands:
       - echo "Some Test Here"
+
   - name: Search tag
     image: alpine/curl:8.2.1
     commands: 
@@ -40,7 +46,7 @@ steps:
       exit 0
 
   - name: following step
-    image: alpine
+    image: alpine/curl:8.2.1
     commands:
        - echo "Some Test Here"
     
