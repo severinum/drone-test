@@ -37,13 +37,7 @@ steps:
     image: alpine/curl:8.2.1
     commands: 
     - apk update && apk upgrade && apk add curl
-    - |
-      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L $${DRONE_COMMIT_SHA}
-      do
-        echo "Tag not found. Waiting ..." 
-        sleep 3
-      done
-      exit 0
+   
 
   - name: following step
     image: alpine/curl:8.2.1
