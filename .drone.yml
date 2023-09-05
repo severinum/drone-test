@@ -38,10 +38,10 @@ steps:
     commands: 
     - echo "Looking for SHA $${DRONE_COMMIT_SHA}"
     - |
-       while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L 1234 ;
+       while curl https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -o happys ;
        do
-          echo "Tag not found. Waiting ..." 
-          sleep 5
+        echo "Tag not found. Waiting ..." 
+        sleep 5
        done
        exit 0
 
