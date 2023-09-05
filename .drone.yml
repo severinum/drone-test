@@ -32,10 +32,11 @@ steps:
     commands: 
     - apk update && apk upgrade && apk add curl
     - |
-      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L happy
+      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L $${DRONE_COMMIT_SHA}
       do
        echo "Tag not found. Waiting ..." && sleep 5
       done
+      exit 0
 
   - name: following step
     image: alpine
