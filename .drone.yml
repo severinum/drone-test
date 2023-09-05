@@ -36,12 +36,11 @@ steps:
   - name: Search tag
     image: alpine/curl:8.2.1
     commands: 
-    - echo "Looking for SHA $${DRONE_COMMIT_SHA}"
+    - echo "Looking for Tag [SHA] $${DRONE_COMMIT_SHA}"
     - |
        while curl -s https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/  | grep -v -o  $${DRONE_COMMIT_SHA} > /dev/null ;
        do
-        echo "Tag not found. Waiting ..." 
-        sleep 5
+        echo "Tag not found. Waiting ..." && sleep 5
        done
        exit 0
 
