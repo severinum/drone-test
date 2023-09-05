@@ -28,20 +28,13 @@ steps:
     commands:
       - echo "Some Test Here"
   - name: Search tag
-    image: alpine
+    image: alpine/curl:8.2.1
     commands: 
     - apk update && apk upgrade && apk add curl
     - |
-      echo "Searching for image tag: $${DRONE_COMMIT_SHA}"
-      while :
+      while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L happy
       do
-      if curl -v --silent https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ 2>&1 | grep $${DRONE_COMMIT_SHA}; then
-        echo "Tag found. Proceeding to deployment step. [Exiting with code 0]"
-        exit 1
-      else
-          echo "Tag not found waiting ..."
-          sleep 10s
-      fi
+    	  echo "Tag not found. Waiting ..." && sleep 5
       done
 
   - name: following step
