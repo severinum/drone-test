@@ -34,7 +34,7 @@ steps:
     - |
       while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L happy
       do
-    	  echo "Tag not found. Waiting ..." && sleep 5
+       echo "Tag not found. Waiting ..." && sleep 5
       done
 
   - name: following step
