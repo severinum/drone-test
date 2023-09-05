@@ -38,7 +38,7 @@ steps:
     commands: 
     - echo "Looking for SHA $${DRONE_COMMIT_SHA}"
     - |
-       while curl https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -o happys ;
+       while curl https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -o happy ;
        do
         echo "Tag not found. Waiting ..." 
         sleep 5
