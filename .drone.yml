@@ -34,7 +34,7 @@ steps:
     - |
       while curl -Lqs https://quay.io/api/v1/repository/sewerynmi/drone-demo/tag/ | grep -v -L $${DRONE_COMMIT_SHA}
       do
-       echo "Tag not found. Waiting ..." && sleep 2
+       echo "Tag not found. Waiting ..." && sleep 5
       done
       exit 0
 
